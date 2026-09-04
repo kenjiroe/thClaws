@@ -1,0 +1,6 @@
+vcs:
+  type: git
+agents:
+  available:
+  - copilot
+  auto_commit: true

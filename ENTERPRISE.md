@@ -248,6 +248,7 @@ become enforceable as their respective phase ships:
 | `plugins` (allow-list, no-external-scripts, no-external-mcp) | 2 | ✅ Shipped | v0.5.0 |
 | `gateway` (HTTP routing, fail-closed, identity injection) | 3 | ✅ Shipped | v0.5.0 |
 | `sso` (OIDC discovery, PKCE, token storage, gateway identity) | 4 | ✅ Shipped (Google smoke verified) | v0.6.0 |
+| `audit` (client-side tool-call log: file writes, shell commands, MCP calls) | 5 | 🚧 Proposed | see [PHASE5-TOOL-CALL-AUDIT.md](PHASE5-TOOL-CALL-AUDIT.md) |
 
 A policy file with all four blocks present is valid against any v0.5.x+
 build; blocks for unimplemented phases are accepted but inert. Once
@@ -330,7 +331,10 @@ who did what.
 This is by design — duplicating audit logs in two places creates
 divergence risk. If your audit/SIEM needs additional client-side
 context (e.g. tool calls, file edits), reach out — that's a Phase 5
-candidate.
+candidate. See [PHASE5-TOOL-CALL-AUDIT.md](PHASE5-TOOL-CALL-AUDIT.md)
+for a concrete proposal covering `write_file`/`bash`/MCP tool calls,
+correlated with the gateway's per-request identity so client-side and
+gateway-side audit trails can be joined by `run_id`.
 
 ### Updating policy without rebuilding the binary
 
