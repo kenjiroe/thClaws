@@ -68,6 +68,17 @@ Useful commands:
 - Keep changes **in-scope** — don't refactor unrelated code in the same PR.
 - For new features, **add tests** alongside the implementation.
 
+## Core feature design
+
+Features that affect tool execution, permissions, policies, or other core paths
+should preserve existing behavior unless explicitly enabled. Keep the integration
+surface to the smallest practical number of existing control points, and put new
+feature logic in a focused module rather than spreading it through the core.
+
+Observability and telemetry integrations must not block the primary workflow when
+their sinks are unavailable. Proposals that change a policy format, core contract,
+or security boundary should be discussed in an issue or RFC before implementation.
+
 ## Commit attribution
 
 We accept contributions under the dual MIT / Apache-2.0 license (see [LICENSE-MIT](LICENSE-MIT) and [LICENSE-APACHE](LICENSE-APACHE)). By submitting a pull request, you agree that your contribution is licensed under the same terms.
